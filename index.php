@@ -1,9 +1,14 @@
 <?php 
 include "services/koneksi.php";
+session_start();
+if($_SESSION['isLogin'] == false) {
+    header("location: login.php");
+}
 define("APP_NAME", "CUYRESTO - WEBSITE PENERIMAAN TAMU");
 
 $query_meja = "SELECT * FROM meja";
 $result_meja = $conn -> query($query_meja);
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +22,12 @@ $result_meja = $conn -> query($query_meja);
 </head>
 
 <body>
+    <?php 
+    include "layouts/header.php";
+    ?>
+
+    <br>
+
     <h1 align="center">DAFTAR MEJA</h1>
     <div class="container">
         <?php 
@@ -41,8 +52,8 @@ $result_meja = $conn -> query($query_meja);
     <script>
     function goToMeja(no_meja, nama_pelanggan) {
         const url = "meja.php";
-        const params = `?no_meja = ${no_meja} & nama_pelanggan = ${nama_pelanggan}`
-        window.location.replace(url + params)
+        const params = `?no_meja=${no_meja}&nama_pelanggan=${nama_pelanggan}`
+        window.location.replace(url + params);
     }
     </script>
 </body>
