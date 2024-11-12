@@ -2,7 +2,7 @@
 include "services/koneksi.php";
 session_start();
 
-if(isset($_SESSION['isLogin'])) {
+if(isset($_SESSION['isLogin']) && $_SESSION['isLogin']) {
     header("location: index.php");
 }
 
@@ -23,7 +23,7 @@ if (isset($_POST['btn-login'])) {
     } else {
         $login_notifikasi = "Akun admin tidak ditemukan";
     }
-
+    $conn->close();
 }
 ?>
 
@@ -33,22 +33,23 @@ if (isset($_POST['btn-login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>LOGIN</title>
 </head>
 
 <body>
-    <i> <?php echo $login_notifikasi ?> </i>
-    <form action=" <?php $_SERVER['PHP_SELF']?>" method="POST">
-        <div>
+    <div class="super-center">
+        <h1>LOGIN ADMIN</h1>
+        <i> <?php echo $login_notifikasi ?> </i>
+        <form action=" <?php $_SERVER['PHP_SELF']?>" method="POST">
+
             <label for="">Username</label>
             <input type="text" name="username">
-        </div>
-        <div>
             <label for="">Password</label>
             <input type="password" name="password">
-        </div>
-        <button type="submit" name="btn-login">LOGIN</button>
-    </form>
+            <button type="submit" name="btn-login">LOGIN</button>
+        </form>
+    </div>
 </body>
 
 </html>
