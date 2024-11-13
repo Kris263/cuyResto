@@ -1,6 +1,7 @@
 <header>
     <div>
         <a href="index.php">CUYRESTO</a>
+        <a href="./report.php">Report</a>
     </div>
     <div>
         <?php 
